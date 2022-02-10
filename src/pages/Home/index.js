@@ -9,203 +9,27 @@ import Carousel, { CarouselItem } from "./Carousel";
 import ScrollButton from "../../components/ScrollButton";
 
 export default function Home() {
-  // const [products, setProducts] = useState([]);
-  const [total, setTotal] = useState("0,00");
+  const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState(0.0);
   const navigate = useNavigate();
-  const products = [
-    {
-      id: 1,
-      image:
-        "https://cdn.awsli.com.br/600x450/1304/1304561/produto/52600368/106cc3ecff.jpg",
-      price: 1.99,
-      name: "Alface",
-    },
-    {
-      id: 2,
-      image:
-        "https://organicalife.com.br/wp-content/uploads/2020/06/alface-crespa_organicalife_v1.jpg",
-      price: 1.99,
-      name: "Alface Crespa",
-    },
-    {
-      id: 3,
-      image:
-        "https://scfoods.fbitsstatic.net/img/p/tomate-debora-maduro-para-molho-500g-70892/257510.jpg?w=800&h=800&v=no-change&qs=ignore",
-      price: 2.0,
-      name: "Tomate",
-    },
-    {
-      id: 4,
-      image:
-        "https://cdn.awsli.com.br/600x700/1578/1578261/produto/76998588/ba2809049e.jpg",
-      price: 1.99,
-      name: "Tomate Cereja",
-    },
-    {
-      id: 5,
-      image:
-        "https://cdn.dooca.store/1452/products/tomate-italiano_640x640+fill_ffffff.jpg?v=1600899422&webp=0",
-      price: 2.0,
-      name: "Tomate Italiano",
-    },
-    {
-      id: 6,
-      image:
-        "https://hiperideal.vteximg.com.br/arquivos/ids/170995-1000-1000/51055.jpg?v=636616549635870000",
-      price: 2.0,
-      name: "Cebola",
-    },
-    {
-      id: 7,
-      image:
-        "https://fortatacadista.vteximg.com.br/arquivos/ids/161321-800-800/CEBOLA-ROXA-KG---631728.jpg?v=637437445828000000",
-      price: 1.99,
-      name: "Cebola Roxa",
-    },
-    {
-      id: 8,
-      image:
-        "https://galeriarural.com.br/lenildo-hortifruti/wp-content/uploads/sites/19/2020/10/Repolho.png",
-      price: 2.0,
-      name: "Repolho",
-    },
-    {
-      id: 9,
-      image:
-        "https://onisafra.com/manaus/wp-content/uploads/2020/05/repolho-roxo.jpg",
-      price: 2.0,
-      name: "Repolho Roxo",
-    },
-    {
-      id: 10,
-      image:
-        "https://cdn.awsli.com.br/800x800/1304/1304561/produto/52600472/7d2fc90581.jpg",
-      price: 1.99,
-      name: "Pepino",
-    },
-    {
-      id: 11,
-      image:
-        "https://www.hortifrutiorganico.com.br/121-large_default/banana-organica-prata-1-kg.jpg",
-      price: 1.99,
-      name: "Banana Prata",
-    },
-    {
-      id: 12,
-      image:
-        "https://hiperideal.vteximg.com.br/arquivos/ids/167706-1000-1000/56383.jpg?v=636615816296530000",
-      price: 2.0,
-      name: "Maça",
-    },
-    {
-      id: 13,
-      image:
-        "https://img-21.ccm2.net/042iHAewS5QhDxJuNauCwI_x864=/728x/aad4dd876b7546b8b4415552846789f4/ccm-faq/uti_123rf_31404789_Katerina_Kovaleva.jpg",
-      price: 4.0,
-      name: "Melancia",
-    },
-    {
-      id: 14,
-      image:
-        "https://onisafra.com/manaus/wp-content/uploads/2020/03/manga-tommy-01.jpg",
-      price: 2.0,
-      name: "Manga",
-    },
-    {
-      id: 15,
-      image:
-        "https://fortatacadista.vteximg.com.br/arquivos/ids/161326-800-800/KIWI-IMPORTADO-KG---631850.jpg?v=637437445847700000",
-      price: 1.99,
-      name: "Kiwi",
-    },
-    {
-      id: 16,
-      image:
-        "https://cd.shoppub.com.br/cenourao/media/cache/7d/dc/7ddcf04db9666b50ce4a4d43c23177eb.png",
-      price: 2.0,
-      name: "Abacaxi",
-    },
-    {
-      id: 17,
-      image:
-        "https://www.proativaalimentos.com.br/image/cache/catalog/img_prod/oleo-essencia-morango-100ml-fruta-puro-essencia-massagem-D_NQ_NP_960102-MLB31202671230_062019-F[1]-1000x1000.jpg",
-      price: 1.99,
-      name: "Morango",
-    },
-    {
-      id: 18,
-      image:
-        "https://s3-sa-east-1.amazonaws.com/rocky-2c5b937991b0cfc379dbf5f675740298/a4ea2a90999a42a7715dd3802ddfe9ef.jpg",
-      price: 5.0,
-      name: "Pitaya",
-    },
-    {
-      id: 19,
-      image:
-        "http://static3.tcdn.com.br/img/img_prod/450860/muda_de_pera_d_agua_ou_europeia_1m_enxertada_676_1_20190611093602.jpg",
-      price: 2.0,
-      name: "Pera",
-    },
-    {
-      id: 20,
-      image:
-        "https://www.embrapa.br/image/journal/article?img_id=32550707&t=1521029890096",
-      price: 2.0,
-      name: "Melão",
-    },
-    {
-      id: 21,
-      image:
-        "https://galeriarural.com.br/lenildo-hortifruti/wp-content/uploads/sites/19/2020/10/Cenoura.png",
-      price: 1.99,
-      name: "Cenoura",
-    },
-    {
-      id: 22,
-      image:
-        "https://arcomixstr.blob.core.windows.net/product/6043-pimentao-vermelh-kg-g.jpg",
-      price: 3.0,
-      name: "Pimentão Vermelho",
-    },
-    {
-      id: 23,
-      image:
-        "https://www.proativaalimentos.com.br/image/cache/catalog/img_prod/beterraba[1]-1000x1000.jpg",
-      price: 2.0,
-      name: "Beterraba",
-    },
-    {
-      id: 24,
-      image: "https://static.clubeextra.com.br/img/uploads/1/865/637865.png",
-      price: 3.0,
-      name: "Abobora",
-    },
-    {
-      id: 25,
-      image:
-        "https://dourados.saofranciscoonline.com/media/catalog/product/cache/1/image/855x635/9df78eab33525d08d6e5fb8d27136e95/i/n/inhame-kg-0000000030106.jpg",
-      price: 1.99,
-      name: "Inhame",
-    },
-  ];
 
   useEffect(() => {
     renderProducts();
   }, []);
 
   function renderProducts() {
-    console.log("banana");
-    // const promise = axios.get("http://localhost:5000/products");
+    const promise = axios.get("http://localhost:5000/products");
 
-    // promise.then((res) => {
-    //   setProducts(res.data);
-    // });
-    // promise.catch((e) => {
-    //   console.log(e.response);
-    // });
+    promise.then((res) => {
+      setProducts(res.data);
+      console.log(res.data);
+    });
+    promise.catch((e) => {
+      console.log(e.response);
+    });
   }
-  function Calculate() {
-    console.log("bananinha");
+  function Calculate(value) {
+    setTotal(total + value);
   }
 
   function GoToCart() {
@@ -239,8 +63,8 @@ export default function Home() {
           </Adve>
           <ListBuy>
             {products.map((h) => (
-              <Product key={h.id} onClick={() => Calculate()}>
-                <ProductImg scr={h.image} />
+              <Product key={h.id} onClick={() => Calculate(h.price)}>
+                <ProductImg src={h.imageURL} />
                 <Description>
                   <p>{h.name}</p>
                   <p>R${h.price}</p>
