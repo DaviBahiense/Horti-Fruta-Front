@@ -18,25 +18,26 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
 
-  margin: 30px 0 25px;
+  margin: 0px 0 20px;
+
+  p{
+    color: grey;
+  }
 `
 
 const Input = styled.input`
   width: 326px;
   height: 58px;
-  margin-bottom: 13px;
+  margin: 6px 0px 6px;
   padding: 15px;
   border: 1px solid #D5D5D5;
   border-radius: 5px;
   
-  color: #000000;
+  color: black;
   font-size: 20px;
   line-height: 23px;
 
-  ::placeholder {
-    color: #000000;
-    opacity: 1;
-  }
+  
 `
 
 const Button = styled.button`
@@ -47,6 +48,7 @@ const Button = styled.button`
   justify-content: center;
   border: none;
   border-radius: 5px;
+  margin-top: 6px;
   
   cursor: pointer;
   
@@ -55,8 +57,8 @@ const Button = styled.button`
   font-weight: 700;
   text-align: center;
   
-  background: #A328D6;
-  color: #FFFFFF;
+  background: #DE4E4E;
+  color: #FFF;
 `
 
 const StyledLink = styled(Link)`
@@ -64,8 +66,9 @@ const StyledLink = styled(Link)`
   font-size: 15px;
   line-height: 18px;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #73D28F;
 `
+
 
 export {
     Container,
