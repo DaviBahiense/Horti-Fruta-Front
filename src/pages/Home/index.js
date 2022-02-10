@@ -37,7 +37,7 @@ export default function Home() {
   }
 
   function GoToLogin() {
-    navigate("/");
+    navigate("/login");
   }
 
   return (
