@@ -10,27 +10,48 @@ import ScrollButton from "../../components/ScrollButton";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
+
   const [total, setTotal] = useState(0.0);
   const navigate = useNavigate();
-
+  const [cart, setCart] = useState([]);
+  let number = 0;
   useEffect(() => {
     renderProducts();
   }, []);
+  let toRemove = [];
+
+  const newProduct = [];
+  for (let i = 0; i < products.length; i++) {
+    newProduct.push({ ...products[i], cont: 0 });
+  }
 
   function renderProducts() {
     const promise = axios.get("http://localhost:5000/products");
-
     promise.then((res) => {
       setProducts(res.data);
-      console.log(res.data);
     });
     promise.catch((e) => {
       console.log(e.response);
     });
   }
-  function Calculate(value) {
-    setTotal(total + value);
+  function Increase(data) {
+    setTotal(total + data.price);
+    setCart([...cart, data]);
   }
+
+  function Remove(data) {
+    setTotal(total - data.price);
+    for (let i = 0; i < cart.length; i++) {
+      if (data.id == cart[i].id) {
+        toRemove = cart;
+        toRemove.splice(i, 1);
+        setCart(toRemove);
+        return;
+      }
+    }
+  }
+
+  function Finish() {}
 
   function GoToCart() {
     navigate("/carrinho");
@@ -62,19 +83,24 @@ export default function Home() {
             </Carousel>
           </Adve>
           <ListBuy>
-            {products.map((h) => (
-              <Product key={h.id} onClick={() => Calculate(h.price)}>
+            {newProduct.map((h) => (
+              <Product key={h.id}>
                 <ProductImg src={h.imageURL} />
                 <Description>
                   <p>{h.name}</p>
                   <p>R${h.price}</p>
                 </Description>
+                <Button>
+                  <button onClick={() => Increase(h)}>+</button>
+                  <p>{h.cont}</p>
+                  <button onClick={() => Remove(h)}>-</button>
+                </Button>
               </Product>
             ))}
           </ListBuy>
         </List>
         <Footer>
-          <StyleLink to={"/carrinho"}>
+          <StyleLink to={"/carrinho"} onClick={() => Finish()}>
             <button>
               <h1>Finalizar Compra</h1>
             </button>
@@ -230,4 +256,41 @@ const ProductImg = styled.img`
   width: 150px;
   height: 190px;
   border-radius: 10px;
+`;
+
+const Button = styled.div`
+  display: flex;
+  flex-direction: row;
+  background-color: #de4e4e;
+  width: 80px;
+  height: 30px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+  button {
+    border: none;
+    height: 30px;
+    width: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    text-decoration: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #de4e4e;
+  }
+
+  p {
+    width: 30px;
+    border-top: 1px solid #de4e4e;
+    border-bottom: 1px solid #de4e4e;
+    background-color: white;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
