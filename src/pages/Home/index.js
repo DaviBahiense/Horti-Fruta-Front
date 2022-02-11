@@ -16,6 +16,19 @@ export default function Home() {
   const [total, setTotal] = useState(0.0);
   const navigate = useNavigate();
   const location = useLocation();
+  const [productsCont, setCont] = useState([]);
+  const [counters, setCounters] = useState([
+    { id: 1, value: 0 },
+    { id: 2, value: 0 },
+    { id: 3, value: 0 },
+    { id: 4, value: 0 },
+    { id: 5, value: 0 },
+    { id: 6, value: 0 },
+    { id: 7, value: 0 },
+    { id: 8, value: 0 },
+    { id: 9, value: 0 },
+    { id: 10, value: 0 },
+  ]);
 
   const [cart, setCart] = useState([]);
 
@@ -24,28 +37,37 @@ export default function Home() {
   }, []);
   let toRemove = [];
 
-  const newProduct = [];
-  for (let i = 0; i < products.length; i++) {
-    newProduct.push({ ...products[i], cont: 0 });
-  }
+  useEffect(() => {
+    renderCounter();
+  }, []);
+
+  function renderCounter() {}
 
   function renderProducts() {
     const promise = axios.get("http://localhost:5000/products");
     promise.then((res) => {
       setProducts(res.data);
+      setCont(products);
     });
     promise.catch((e) => {
       console.log(e.response);
     });
   }
 
-  function Increase(data) {
+  function Increase(data, index) {
     setTotal(total + data.price);
     setCart([...cart, data]);
+    const countersIn = counters;
+    countersIn[index].value++;
+    setCounters(countersIn);
+    console.log(data);
   }
 
-  function Remove(data) {
+  function Remove(data, index) {
     setTotal(total - data.price);
+    const countersOut = counters;
+    countersOut[index].value--;
+    setCounters(countersOut);
     for (let i = 0; i < cart.length; i++) {
       if (data.id == cart[i].id) {
         toRemove = cart;
@@ -99,7 +121,7 @@ export default function Home() {
             </Carousel>
           </Adve>
           <ListBuy>
-            {newProduct.map((h) => (
+            {products.map((h, i) => (
               <Product key={h.id}>
                 <ProductImg src={h.imageURL} />
                 <Description>
@@ -107,9 +129,9 @@ export default function Home() {
                   <p>R${h.price}</p>
                 </Description>
                 <Button>
-                  <button onClick={() => Increase(h)}>+</button>
-                  <p>{h.cont}</p>
-                  <button onClick={() => Remove(h)}>-</button>
+                  <button onClick={() => Increase(h, i)}>+</button>
+                  <p>{counters[i].value}</p>
+                  <button onClick={() => Remove(h, i)}>-</button>
                 </Button>
               </Product>
             ))}
