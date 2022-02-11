@@ -29,6 +29,10 @@ export default function Home() {
     const promise = axios.get("http://localhost:5000/products");
     promise.then((res) => {
       setProducts(res.data);
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
     });
     promise.catch((e) => {
       console.log(e.response);
