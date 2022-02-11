@@ -1,14 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = "http://localhost:5000";
 
 function createConfig(token) {
-  return { headers: { authorization: token } };
+  return { headers: { Authorization: `Bearer ${token}` } };
 }
 
 function registerUser(body) {
   const promise = axios.post(`${BASE_URL}/register`, body);
-
 
   return promise;
 }
@@ -19,11 +18,12 @@ function login(body) {
   return promise;
 }
 
-function mountCart(cart, token){
+function mountCart(cart, token) {
   const config = createConfig(token);
-console.log(cart)
-console.log(token)
-  const promise = axios.post(`${BASE_URL}/carrinho`, cart,config);
+  console.log(cart);
+  console.log(config);
+
+  const promise = axios.post(`${BASE_URL}/carrinho`, cart, config);
 
   return promise;
 }
@@ -39,7 +39,7 @@ const api = {
   registerUser,
   login,
   mountCart,
-  getCart
-}
+  getCart,
+};
 
 export default api;
