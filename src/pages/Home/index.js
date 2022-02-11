@@ -22,7 +22,7 @@ export default function Home() {
 
     promise.then((res) => {
       setProducts(res.data);
-      console.log(res.data);
+
     });
     promise.catch((e) => {
       console.log(e.response);
