@@ -35,36 +35,28 @@ const Img = styled.img`
   margin-left: 5px;
 `;
 
-const List = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
-`;
 
 const ListBuy = styled.div`
-  margin-top: 60px;
-  margin-bottom: 150px;
+ 
   width: 100%;
+  height: 100%;
   border-radius: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 const Product = styled.div`
-  width: 200px;
+  width: 400px;
   gap: 25px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
   box-shadow: 0 0 0.7em gray;
   border-radius: 10px;
   margin-right: 45px;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
 `;
 
 const Description = styled.div`
@@ -118,19 +110,6 @@ const StyleLink = styled(Link)`
   }
 `;
 
-const Adve = styled.div`
-  margin-top: 100px;
-  width: 95%;
-  display: flex;
-  justify-content: center;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 350px;
-  border-radius: 15px;
-`;
-
 const Icons = styled.div`
   display: flex;
   gap: 30px;
@@ -138,15 +117,19 @@ const Icons = styled.div`
 
 const ProductImg = styled.img`
   margin-top: 10px;
-  width: 150px;
-  height: 190px;
+  width: 70px;
+  height: 70px;
   border-radius: 10px;
 `;
 const Mid = styled.div`
   margin-top: 100px;
   width: 100%;
   height: 70vh;
-  background-color: grey;
+  
+
+  h1{
+
+  }
 
 `;
 
@@ -159,5 +142,9 @@ export {
     Icons,
     Img,
     Mid,
+    ListBuy, 
+    Product,
+    ProductImg,
+    Description
 
 }

@@ -7,16 +7,18 @@ import { useContext } from "react";
 import Logo from "../../assets/Logo.png";
 import Carousel, { CarouselItem } from "./Carousel";
 import ScrollButton from "../../components/ScrollButton";
+import api from "../../services/api";
+import useAuth from "../../hooks/useAuth";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-
+  const { auth } = useAuth();
   const [total, setTotal] = useState(0.0);
   const navigate = useNavigate();
   const location = useLocation()
   
   const [cart, setCart] = useState([]);
-  let number = 0;
+
   useEffect(() => {
     renderProducts();
   }, []);
@@ -36,6 +38,7 @@ export default function Home() {
       console.log(e.response);
     });
   }
+
   function Increase(data) {
     setTotal(total + data.price);
     setCart([...cart, data]);
@@ -53,15 +56,18 @@ export default function Home() {
     }
   }
 
-  function Finish() {}
+  async function Finish() {
+    try {
+      console.log(cart)
+      await api.mountCart(cart, auth.token);
+      navigate("/carrinho");
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   function GoToCart() {
-    navigate("/carrinho", { state: {
-      
-      values: "jorj"
-      
-    }
-  });
+    navigate("/carrinho");
   }
 
   function GoToLogin() {
@@ -113,7 +119,7 @@ export default function Home() {
             </button>
           </StyleLink>
           <Saldo>
-            <h2>Total: {total}</h2>
+            <h2>Total: {parseFloat(total).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</h2>
           </Saldo>
 
           <ScrollButton />

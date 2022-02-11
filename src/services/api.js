@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:5000';
 
 function createConfig(token) {
-  return { headers: { authorization: `Bearer ${token}` } };
+  return { headers: { authorization: token } };
 }
 
 function registerUser(body) {
@@ -19,9 +19,27 @@ function login(body) {
   return promise;
 }
 
+function mountCart(cart, token){
+  const config = createConfig(token);
+console.log(cart)
+console.log(token)
+  const promise = axios.post(`${BASE_URL}/carrinho`, cart,config);
+
+  return promise;
+}
+
+function getCart(token) {
+  const config = createConfig(token);
+  const promise = axios.get(`${BASE_URL}/carrinho`, config);
+
+  return promise;
+}
+
 const api = {
   registerUser,
   login,
+  mountCart,
+  getCart
 }
 
 export default api;
