@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import Logo from "../../assets/Logo.png";
 import Carousel, { CarouselItem } from "./Carousel";
@@ -12,7 +12,8 @@ export default function Home() {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0.0);
   const navigate = useNavigate();
-
+  const location = useLocation()
+  
   useEffect(() => {
     renderProducts();
   }, []);
@@ -32,8 +33,14 @@ export default function Home() {
     setTotal(total + value);
   }
 
+  console.log(products)
   function GoToCart() {
-    navigate("/carrinho");
+    navigate("/carrinho", { state: {
+      
+      values: "jorj"
+      
+    }
+  });
   }
 
   function GoToLogin() {
@@ -74,7 +81,7 @@ export default function Home() {
           </ListBuy>
         </List>
         <Footer>
-          <StyleLink to={"/carrinho"}>
+          <StyleLink  onClick={() =>GoToCart()}>
             <button>
               <h1>Finalizar Compra</h1>
             </button>
@@ -190,7 +197,7 @@ const Saldo = styled.div`
   right: 25px;
 `;
 
-const StyleLink = styled(Link)`
+const StyleLink = styled.div`
   text-decoration: none;
   button {
     width: 300px;
