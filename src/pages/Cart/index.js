@@ -20,11 +20,17 @@ import {
   Product,
   ProductImg,
   Description,
+  CartContainer,
+  ConfirmationContainer,
+  UserConfirmation,
+  AddressConfirmation,
+  PaymentConfirmation,
 } from "../../components/CartComponents";
 export default function Cart() {
-  console.log("chegou carrinho");
   const navigate = useNavigate();
   const [body, setBody] = useState([]);
+  const [total, setTotal] = useState("");
+  const [user, setUser] = useState({});
   const { auth } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,8 +40,12 @@ export default function Cart() {
 
   async function getCart() {
     try {
-      const data = await api.getCart(auth.token);
-      setBody(data);
+      console.log("chamei o carrinho");
+      const response = await api.getCart(auth.token);
+
+      setBody(response.data.cart);
+      setTotal(response.data.total);
+      setUser({ name: response.data.name, address: response.data.address });
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -50,9 +60,8 @@ export default function Cart() {
     navigate("/login");
   }
 
-  const arr = { ...body.data };
+  const arr = { ...body };
   const arrCart = arr[0];
-  console.log(arrCart);
 
   return (
     <Container>
@@ -67,19 +76,37 @@ export default function Cart() {
         </Icons>
       </Top>
       <Mid>
-        <h1>Seu carrinho contém:</h1>
-        <ListBuy>
-          {arrCart.map((i) => (
-            <Product key={i._id}>
-              <ProductImg src={i.imageURL} />
-              <Description>
-                <p>{i.name}</p>
-                <p>R${i.price}</p>
-                <p>Quantidade: {0}</p>
-              </Description>
-            </Product>
-          ))}
-        </ListBuy>
+        <CartContainer>
+          <h1>Seu carrinho contém:</h1>
+          <ListBuy>
+            {arrCart.map((i) => (
+              <Product key={i._id}>
+                <ProductImg src={i.imageURL} />
+                <Description>
+                  <p>{i.name}</p>
+                  <p>R${i.price}</p>
+                  <p>Quantidade: {0}</p>
+                </Description>
+              </Product>
+            ))}
+          </ListBuy>
+        </CartContainer>
+        <ConfirmationContainer>
+          <UserConfirmation>
+            <h1>Confime Seus Dados</h1>
+            <p>Nome para entrega: {user.name}</p>
+            <p> Endereço para entrega: {user.address}</p>
+
+            <AddressConfirmation>
+              <p>Deseja que a entrega seja em um endereço diferente?</p>
+              <span>Lamento</span>
+            </AddressConfirmation>
+          </UserConfirmation>
+          <PaymentConfirmation>
+            <span>Total: R$ {total}</span>
+            <span>Forma de Pagamento: Alma</span>
+          </PaymentConfirmation>
+        </ConfirmationContainer>
       </Mid>
 
       <Footer>
@@ -88,9 +115,6 @@ export default function Cart() {
             <h1>Confirmar Compra</h1>
           </button>
         </StyleLink>
-        <Saldo>
-          <h2>Total: </h2>
-        </Saldo>
       </Footer>
     </Container>
   );

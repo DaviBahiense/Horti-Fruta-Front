@@ -61,7 +61,7 @@ export default function Home() {
       navigate("/login");
     }
     try {
-      await api.mountCart(cart, auth.token);
+      await api.mountCart(cart, total, auth.token);
       console.log("cheguei aqui");
       navigate("/carrinho");
     } catch (error) {

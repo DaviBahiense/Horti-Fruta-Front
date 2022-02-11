@@ -18,12 +18,14 @@ function login(body) {
   return promise;
 }
 
-function mountCart(cart, token) {
+function mountCart(cart, total, token) {
   const config = createConfig(token);
-  console.log(cart);
-  console.log(config);
 
-  const promise = axios.post(`${BASE_URL}/carrinho`, cart, config);
+  const promise = axios.post(
+    `${BASE_URL}/carrinho`,
+    { cart: cart, total: total },
+    config
+  );
 
   return promise;
 }

@@ -4,10 +4,26 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width:100%
-  height:100%
-  `;
+  width: 100%;
+  height: 100%;
+`;
 
+const CartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 100%;
+  border: 2px solid #73d28f;
+  border-radius: 5px;
+  background-color: white;
+`;
+
+const ConfirmationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-width: 20%;
+  gap: 20px;
+`;
 const Top = styled.div`
   display: flex;
   justify-content: space-between;
@@ -35,9 +51,7 @@ const Img = styled.img`
   margin-left: 5px;
 `;
 
-
 const ListBuy = styled.div`
- 
   width: 100%;
   height: 100%;
   border-radius: 20px;
@@ -66,7 +80,24 @@ const Description = styled.div`
   align-items: center;
   gap: 10px;
 `;
+const UserConfirmation = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #73d28f;
+  border-radius: 5px;
+`;
+const PaymentConfirmation = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #73d28f;
+  border-radius: 5px;
+`;
 
+const AddressConfirmation = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+`;
 const Footer = styled.footer`
   height: 100px;
   position: fixed;
@@ -122,29 +153,32 @@ const ProductImg = styled.img`
   border-radius: 10px;
 `;
 const Mid = styled.div`
+  display: flex;
+  justify-content: space-between;
   margin-top: 100px;
   width: 100%;
   height: 70vh;
-  
-
-  h1{
-
+  gap: 20px;
+  h1 {
   }
-
 `;
 
 export {
-    Container,
-    Top,
-    Footer,
-    StyleLink,
-    Saldo,
-    Icons,
-    Img,
-    Mid,
-    ListBuy, 
-    Product,
-    ProductImg,
-    Description
-
-}
+  Container,
+  Top,
+  Footer,
+  StyleLink,
+  Saldo,
+  Icons,
+  Img,
+  Mid,
+  ListBuy,
+  Product,
+  ProductImg,
+  Description,
+  CartContainer,
+  ConfirmationContainer,
+  UserConfirmation,
+  PaymentConfirmation,
+  AddressConfirmation,
+};
