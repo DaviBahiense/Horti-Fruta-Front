@@ -15,8 +15,8 @@ export default function Home() {
   const { auth } = useAuth();
   const [total, setTotal] = useState(0.0);
   const navigate = useNavigate();
-  const location = useLocation()
-  
+  const location = useLocation();
+
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -58,14 +58,14 @@ export default function Home() {
 
   async function Finish() {
     if (!auth) {
-      navigate("/login")
+      navigate("/login");
     }
     try {
-
       await api.mountCart(cart, auth.token);
+      console.log("cheguei aqui");
       navigate("/carrinho");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -122,7 +122,12 @@ export default function Home() {
             </button>
           </StyleLink>
           <Saldo>
-            <h2>Total: {parseFloat(total).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</h2>
+            <h2>
+              Total:{" "}
+              {parseFloat(total).toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+              })}
+            </h2>
           </Saldo>
 
           <ScrollButton />
