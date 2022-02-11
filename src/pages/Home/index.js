@@ -10,7 +10,7 @@ import ScrollButton from "../../components/ScrollButton";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-
+  const auth = { headers: { Authorization: `Bearer ${user.token}` } };
   const [total, setTotal] = useState(0.0);
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
@@ -29,10 +29,6 @@ export default function Home() {
     const promise = axios.get("http://localhost:5000/products");
     promise.then((res) => {
       setProducts(res.data);
-<<<<<<< HEAD
-=======
-
->>>>>>> main
     });
     promise.catch((e) => {
       console.log(e.response);
@@ -54,8 +50,6 @@ export default function Home() {
       }
     }
   }
-
-  function Finish() {}
 
   function GoToCart() {
     navigate("/carrinho");
