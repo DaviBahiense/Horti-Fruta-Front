@@ -18,12 +18,13 @@ function login(body) {
   return promise;
 }
 
-function mountCart(cart, token) {
+function mountCart(cart, total, token) {
   const config = createConfig(token);
-  console.log(cart);
-  console.log(config);
-
-  const promise = axios.post(`${BASE_URL}/carrinho`, cart, config);
+  const promise = axios.post(
+    `${BASE_URL}/carrinho`,
+    { cart: cart, total: total },
+    config
+  );
 
   return promise;
 }
@@ -35,11 +36,25 @@ function getCart(token) {
   return promise;
 }
 
+function sendOrder(orderItens, orderTotal, token) {
+  console.log("chegou pro envio");
+  const config = createConfig(token);
+  const promise = axios.post(
+    `${BASE_URL}/order`,
+    { orderItens: orderItens, orderTotal: orderTotal },
+    config
+  );
+
+  console.log(promise);
+
+  return promise;
+}
 const api = {
   registerUser,
   login,
   mountCart,
   getCart,
+  sendOrder,
 };
 
 export default api;
