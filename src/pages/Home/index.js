@@ -57,8 +57,11 @@ export default function Home() {
   }
 
   async function Finish() {
+    if (!auth) {
+      navigate("/login")
+    }
     try {
-      console.log(cart)
+
       await api.mountCart(cart, auth.token);
       navigate("/carrinho");
     } catch (error) {
