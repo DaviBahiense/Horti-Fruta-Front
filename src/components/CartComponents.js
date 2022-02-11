@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const Container = styled.div`
   display: flex;
@@ -124,7 +125,7 @@ const Saldo = styled.div`
   right: 25px;
 `;
 
-const StyleLink = styled(Link)`
+const StyleLink = styled.div`
   text-decoration: none;
   button {
     width: 300px;
@@ -163,6 +164,18 @@ const Mid = styled.div`
   }
 `;
 
+const StyleToast = styled(ToastContainer)`
+background-color:pink;
+color:blue;
+position="top-center";
+autoClose={4908};
+hideProgressBar={false};
+newestOnTop={false};
+closeOnClick;
+rtl={false};
+pauseOnFocusLoss
+draggable={false};
+pauseOnHover;`;
 export {
   Container,
   Top,
@@ -181,4 +194,5 @@ export {
   UserConfirmation,
   PaymentConfirmation,
   AddressConfirmation,
+  StyleToast,
 };

@@ -7,6 +7,8 @@ import { useContext } from "react";
 import api from "../../services/api";
 import Logo from "../../assets/Logo.png";
 import useAuth from "../../hooks/useAuth";
+
+import { ToastContainer, toast } from "react-toastify";
 import {
   Container,
   Top,
@@ -25,6 +27,7 @@ import {
   UserConfirmation,
   AddressConfirmation,
   PaymentConfirmation,
+  StyleToast,
 } from "../../components/CartComponents";
 export default function Cart() {
   const navigate = useNavigate();
@@ -63,10 +66,27 @@ export default function Cart() {
   const arr = { ...body };
   const arrCart = arr[0];
 
+  async function confirmPurchase() {
+    console.log("Chegou na confirmação");
+
+    if (body[0].length === 0) {
+      return alert("Você não pode confirmar uma compra vazia!");
+    }
+    try {
+      const orderData = await api.sendOrder(body, total, auth.token);
+      console.log(orderData);
+      alert(orderData.data);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <Container>
       <Top>
-        <Img src={Logo} />
+        <Link to={"/"}>
+          <Img src={Logo} />
+        </Link>
         <Icons>
           <ion-icon
             name="person-outline"
@@ -110,11 +130,12 @@ export default function Cart() {
       </Mid>
 
       <Footer>
-        <StyleLink to={"/carrinho"}>
-          <button>
+        <StyleLink>
+          <button onClick={() => confirmPurchase()}>
             <h1>Confirmar Compra</h1>
           </button>
         </StyleLink>
+        <ToastContainer />
       </Footer>
     </Container>
   );
