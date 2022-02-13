@@ -7,7 +7,7 @@ import { useContext } from "react";
 import api from "../../services/api";
 import Logo from "../../assets/Logo.png";
 import useAuth from "../../hooks/useAuth";
-
+import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import {
   Container,
@@ -29,6 +29,7 @@ import {
   PaymentConfirmation,
   StyleToast,
 } from "../../components/CartComponents";
+import { Bluetooth } from "react-ionicons";
 export default function Cart() {
   const navigate = useNavigate();
   const [body, setBody] = useState([]);
@@ -70,12 +71,24 @@ export default function Cart() {
     console.log("Chegou na confirmação");
 
     if (body[0].length === 0) {
-      return alert("Você não pode confirmar uma compra vazia!");
+      return Swal.fire(
+        "Seu Carrinho está Vazio!",
+        `Você não pode enviar um pedido se não pedir nada!`,
+        "error"
+      );
     }
     try {
       const orderData = await api.sendOrder(body, total, auth.token);
       console.log(orderData);
-      alert(orderData.data);
+      Swal.fire({
+        title: `Pedido enviado!`,
+        text: `O número do seu pedido é:
+         ${orderData.data} `,
+        imageUrl: `${Logo}`,
+
+        color: "#73d28f",
+      });
+
       navigate("/");
     } catch (error) {
       console.log(error);
