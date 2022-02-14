@@ -46,12 +46,20 @@ function sendOrder(orderItens, orderTotal, token) {
 
   return promise;
 }
+
+function getOrders(token) {
+  const config = createConfig(token);
+  const promise = axios.get(`${BASE_URL}/user/orders`, config);
+
+  return promise;
+}
 const api = {
   registerUser,
   login,
   mountCart,
   getCart,
   sendOrder,
+  getOrders,
 };
 
 export default api;

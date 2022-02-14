@@ -80,7 +80,7 @@ export default function Home() {
     countersOut[index].value--;
     setCounters(countersOut);
     for (let i = 0; i < cart.length; i++) {
-      if (data.id == cart[i].id) {
+      if (data.id === cart[i].id) {
         toRemove = cart;
         toRemove.splice(i, 1);
         setCart(toRemove);
@@ -90,6 +90,10 @@ export default function Home() {
   }
 
   async function Finish() {
+    const stringCart = JSON.stringify(cart);
+    localStorage.removeItem("userCart");
+    localStorage.setItem("userCart", stringCart);
+
     if (!auth) {
       navigate("/login");
     }
@@ -100,42 +104,6 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  function GoToCart() {
-    let totalItems = cart.length;
-    Swal.fire({
-      title: "Seu Carrinho!",
-
-      text:
-        totalItems > 0
-          ? `Você tem um total de ${totalItems} item(s) por R$ ${total.toLocaleString(
-              "pt-BR",
-              {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              }
-            )} no seu carrinho! Está pronto para finalizar sua compra?`
-          : "Você nem selecionou nada!",
-      showCancelButton: totalItems > 0 ? true : false,
-      confirmButtonColor: "#73d28f",
-      cancelButtonColor: "#DE4E4E",
-      confirmButtonText:
-        totalItems > 0 ? "Sim, quero confirmar!" : "Voltar e Selecionar",
-      cancelButtonText: "Não, ainda estou pensando!",
-    }).then((result) => {
-      if (result.isConfirmed && totalItems > 0) {
-        Finish();
-      }
-    });
-  }
-
-  function GoToLogin() {
-    navigate("/login");
-  }
-
-  function GoToUserPage() {
-    navigate("/perfil");
   }
 
   return (

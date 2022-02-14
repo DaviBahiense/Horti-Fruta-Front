@@ -7,11 +7,8 @@ import Swal from "sweetalert2";
 
 import {
   Container,
-  Top,
   Footer,
   StyleLink,
-  Icons,
-  Img,
   Mid,
   ListBuy,
   Product,
