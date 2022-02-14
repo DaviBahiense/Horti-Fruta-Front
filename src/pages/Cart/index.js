@@ -1,22 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useContext } from "react";
 import api from "../../services/api";
 import Logo from "../../assets/Logo.png";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
-import { ToastContainer, toast } from "react-toastify";
 import {
   Container,
-  Top,
   Footer,
   StyleLink,
-  Saldo,
-  Icons,
-  Img,
   Mid,
   ListBuy,
   Product,
@@ -27,8 +19,9 @@ import {
   UserConfirmation,
   AddressConfirmation,
   PaymentConfirmation,
-  StyleToast,
 } from "../../components/CartComponents";
+import Header from "../Header";
+
 export default function Cart() {
   const navigate = useNavigate();
   const [body, setBody] = useState([]);
@@ -43,7 +36,6 @@ export default function Cart() {
 
   async function getCart() {
     try {
-      console.log("chamei o carrinho");
       const response = await api.getCart(auth.token);
 
       setBody(response.data.cart);
@@ -67,15 +59,25 @@ export default function Cart() {
   const arrCart = arr[0];
 
   async function confirmPurchase() {
-    console.log("Chegou na confirmação");
-
     if (body[0].length === 0) {
-      return alert("Você não pode confirmar uma compra vazia!");
+      return Swal.fire(
+        "Seu Carrinho está Vazio!",
+        `Você não pode enviar um pedido se não pedir nada!`,
+        "error"
+      );
     }
     try {
       const orderData = await api.sendOrder(body, total, auth.token);
-      console.log(orderData);
-      alert(orderData.data);
+
+      Swal.fire({
+        title: `Pedido enviado!`,
+        text: `O número do seu pedido é:
+         ${orderData.data} `,
+        imageUrl: `${Logo}`,
+
+        color: "#73d28f",
+      });
+
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -83,18 +85,7 @@ export default function Cart() {
   }
   return (
     <Container>
-      <Top>
-        <Link to={"/"}>
-          <Img src={Logo} />
-        </Link>
-        <Icons>
-          <ion-icon
-            name="person-outline"
-            onClick={() => GoToLogin()}
-          ></ion-icon>
-          <ion-icon name="cart-outline"></ion-icon>
-        </Icons>
-      </Top>
+      <Header />
       <Mid>
         <CartContainer>
           <h1>Seu carrinho contém:</h1>
@@ -104,7 +95,13 @@ export default function Cart() {
                 <ProductImg src={i.imageURL} />
                 <Description>
                   <p>{i.name}</p>
-                  <p>R${i.price}</p>
+                  <p>
+                    R$
+                    {i.price.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
                   <p>Quantidade: {0}</p>
                 </Description>
               </Product>
@@ -123,7 +120,13 @@ export default function Cart() {
             </AddressConfirmation>
           </UserConfirmation>
           <PaymentConfirmation>
-            <span>Total: R$ {total}</span>
+            <span>
+              Total: R${" "}
+              {total.toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
             <span>Forma de Pagamento: Alma</span>
           </PaymentConfirmation>
         </ConfirmationContainer>
@@ -135,7 +138,6 @@ export default function Cart() {
             <h1>Confirmar Compra</h1>
           </button>
         </StyleLink>
-        <ToastContainer />
       </Footer>
     </Container>
   );
