@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useContext } from "react";
 import Logo from "../../assets/Logo.png";
 import Carousel, { CarouselItem } from "./Carousel";
 import ScrollButton from "../../components/ScrollButton";
@@ -92,7 +92,26 @@ export default function Home() {
   }
 
   function GoToCart() {
-    navigate("/carrinho");
+    let totalItems = cart.length;
+    Swal.fire({
+      title: "Seu Carrinho!",
+      text: `Você tem um total de ${totalItems} item(s) por R$ ${total.toLocaleString(
+        "pt-BR",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }
+      )} no seu carrinho! Está pronto para finalizar sua compra?`,
+      showCancelButton: true,
+      confirmButtonColor: "#73d28f",
+      cancelButtonColor: "#DE4E4E",
+      confirmButtonText: "Sim, antes que tenha outro reajuste",
+      cancelButtonText: "Não, tá muito caro!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Finish();
+      }
+    });
   }
 
   function GoToLogin() {
@@ -126,7 +145,13 @@ export default function Home() {
                 <ProductImg src={h.imageURL} />
                 <Description>
                   <p>{h.name}</p>
-                  <p>R${h.price}</p>
+                  <p>
+                    R$
+                    {h.price.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
                 </Description>
                 <Button>
                   <button onClick={() => Increase(h, i)}>+</button>

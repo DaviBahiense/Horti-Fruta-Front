@@ -117,7 +117,13 @@ export default function Cart() {
                 <ProductImg src={i.imageURL} />
                 <Description>
                   <p>{i.name}</p>
-                  <p>R${i.price}</p>
+                  <p>
+                    R$
+                    {i.price.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
                   <p>Quantidade: {0}</p>
                 </Description>
               </Product>
