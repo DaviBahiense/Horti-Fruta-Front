@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useContext } from "react";
 import api from "../../services/api";
 import Logo from "../../assets/Logo.png";
 import useAuth from "../../hooks/useAuth";
@@ -25,6 +23,7 @@ import {
   AddressConfirmation,
   PaymentConfirmation,
 } from "../../components/CartComponents";
+import Header from "../Header";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -89,18 +88,7 @@ export default function Cart() {
   }
   return (
     <Container>
-      <Top>
-        <Link to={"/"}>
-          <Img src={Logo} />
-        </Link>
-        <Icons>
-          <ion-icon
-            name="person-outline"
-            onClick={() => GoToLogin()}
-          ></ion-icon>
-          <ion-icon name="cart-outline"></ion-icon>
-        </Icons>
-      </Top>
+      <Header />
       <Mid>
         <CartContainer>
           <h1>Seu carrinho contém:</h1>
@@ -135,7 +123,13 @@ export default function Cart() {
             </AddressConfirmation>
           </UserConfirmation>
           <PaymentConfirmation>
-            <span>Total: R$ {total}</span>
+            <span>
+              Total: R${" "}
+              {total.toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </span>
             <span>Forma de Pagamento: Alma</span>
           </PaymentConfirmation>
         </ConfirmationContainer>

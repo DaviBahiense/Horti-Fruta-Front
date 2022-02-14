@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate, useLocation } from "react-router-dom";
-import Logo from "../../assets/Logo.png";
 import Carousel, { CarouselItem } from "./Carousel";
 import ScrollButton from "../../components/ScrollButton";
 import api from "../../services/api";
@@ -10,9 +9,6 @@ import useAuth from "../../hooks/useAuth";
 import { BASE_URL } from "../../services/api";
 import {
   Container,
-  Top,
-  Img,
-  Icons,
   List,
   Adve,
   Image,
@@ -25,16 +21,13 @@ import {
   StyleLink,
   Saldo,
 } from "./homeStyle.js";
+import Header from "../Header";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
   const { auth } = useAuth();
   const [total, setTotal] = useState(0.0);
-  const [welcomeMessage, setMessage] = useState(
-    "Olá! Faça seu login antes de finalizar sua compra!"
-  );
   const navigate = useNavigate();
-  const location = useLocation();
   const [productsCont, setCont] = useState([]);
   const [counters, setCounters] = useState([
     { id: 1, value: 0 },
@@ -71,9 +64,6 @@ export default function Home() {
     promise.catch((e) => {
       console.log(e.response);
     });
-    if (auth !== null) {
-      setMessage(`Olá, ${auth.name}!`);
-    }
   }
 
   function Increase(data, index) {
@@ -144,20 +134,14 @@ export default function Home() {
     navigate("/login");
   }
 
+  function GoToUserPage() {
+    navigate("/perfil");
+  }
+
   return (
     <>
       <Container>
-        <Top>
-          <Img src={Logo} />
-          <Icons>
-            <span>{welcomeMessage}</span>
-            <ion-icon
-              name="person-outline"
-              onClick={() => GoToLogin()}
-            ></ion-icon>
-            <ion-icon name="cart-outline" onClick={() => GoToCart()}></ion-icon>
-          </Icons>
-        </Top>
+        <Header></Header>
         <List>
           <Adve>
             <Carousel>
