@@ -10,18 +10,28 @@ const Container = styled.div`
 const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 55%;
   height: 100%;
-  border: 2px solid #73d28f;
+  border: 2px solid #de4e4e;
   border-radius: 5px;
   background-color: white;
+  position: relative;
+  overflow: hidden;
+  margin-left: 100px;
+  margin-top: 20px;
+
+  h1 {
+    margin-left: 25px;
+  }
 `;
 
 const ConfirmationContainer = styled.div`
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  min-width: 20%;
+  min-width: 25%;
   gap: 20px;
+  margin-right: 90px;
 `;
 const Top = styled.div`
   display: flex;
@@ -56,12 +66,17 @@ const ListBuy = styled.div`
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-start;
+  overflow-y: auto;
+  margin-left: 15px;
+  position: absolute;
+  top: 70px;
+  left: 60px;
 `;
 
 const Product = styled.div`
-  width: 400px;
+  width: 600px;
   gap: 25px;
   display: flex;
   flex-direction: row;
@@ -70,6 +85,8 @@ const Product = styled.div`
   border-radius: 10px;
   margin-right: 45px;
   margin-bottom: 15px;
+  margin-top: 10px;
+  margin-left: 10px;
 `;
 
 const Description = styled.div`
@@ -82,14 +99,30 @@ const Description = styled.div`
 const UserConfirmation = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid #73d28f;
+  border: 2px solid #de4e4e;
   border-radius: 5px;
+
+  h1 {
+    margin-left: 10px;
+  }
+  p {
+    margin-left: 20px;
+  }
+  span {
+    margin-left: 20px;
+  }
 `;
 const PaymentConfirmation = styled.div`
   display: flex;
   flex-direction: column;
-  border: 2px solid #73d28f;
+  border: 2px solid #de4e4e;
   border-radius: 5px;
+  span {
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
 `;
 
 const AddressConfirmation = styled.div`
@@ -162,6 +195,24 @@ const Mid = styled.div`
   }
 `;
 
+const TopCart = styled.div`
+  background-color: #de4e4e;
+  height: 65px;
+
+  h1 {
+    color: white;
+  }
+`;
+
+const TopUser = styled.div`
+  background-color: #de4e4e;
+  height: 60px;
+
+  h1 {
+    color: white;
+  }
+`;
+
 export {
   Container,
   Top,
@@ -180,4 +231,6 @@ export {
   UserConfirmation,
   PaymentConfirmation,
   AddressConfirmation,
+  TopCart,
+  TopUser,
 };

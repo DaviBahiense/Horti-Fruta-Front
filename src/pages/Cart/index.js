@@ -19,6 +19,8 @@ import {
   UserConfirmation,
   AddressConfirmation,
   PaymentConfirmation,
+  TopCart,
+  TopUser,
 } from "../../components/CartComponents";
 import Header from "../Header";
 
@@ -88,7 +90,9 @@ export default function Cart() {
       <Header />
       <Mid>
         <CartContainer>
-          <h1>Seu carrinho contém:</h1>
+          <TopCart>
+            <h1>Seu carrinho contém:</h1>
+          </TopCart>
           <ListBuy>
             {arrCart.map((i) => (
               <Product key={i._id}>
@@ -102,7 +106,6 @@ export default function Cart() {
                       maximumFractionDigits: 2,
                     })}
                   </p>
-                  <p>Quantidade: {0}</p>
                 </Description>
               </Product>
             ))}
@@ -110,7 +113,9 @@ export default function Cart() {
         </CartContainer>
         <ConfirmationContainer>
           <UserConfirmation>
-            <h1>Confime Seus Dados</h1>
+            <TopUser>
+              <h1>Confirme Seus Dados</h1>
+            </TopUser>
             <p>Nome para entrega: {user.name}</p>
             <p> Endereço para entrega: {user.address}</p>
 
