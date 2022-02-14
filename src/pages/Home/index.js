@@ -22,6 +22,9 @@ import {
   Saldo,
 } from "./homeStyle.js";
 import Header from "../Header";
+import LoginContext from "../../context/LoginContext.js";
+import ContContext from "../../context/CounterContext.js";
+import { useContext } from "react";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -29,18 +32,8 @@ export default function Home() {
   const [total, setTotal] = useState(0.0);
   const navigate = useNavigate();
   const [productsCont, setCont] = useState([]);
-  const [counters, setCounters] = useState([
-    { id: 1, value: 0 },
-    { id: 2, value: 0 },
-    { id: 3, value: 0 },
-    { id: 4, value: 0 },
-    { id: 5, value: 0 },
-    { id: 6, value: 0 },
-    { id: 7, value: 0 },
-    { id: 8, value: 0 },
-    { id: 9, value: 0 },
-    { id: 10, value: 0 },
-  ]);
+  const { isLogged, setIsLogged } = useContext(LoginContext);
+  const { counters, setCounters } = useContext(ContContext);
 
   const [cart, setCart] = useState([]);
 
@@ -113,9 +106,9 @@ export default function Home() {
         <List>
           <Adve>
             <Carousel>
-              <Image src="https://www.enicbcmed.eu/sites/default/files/styles/image_style_slider/public/2020-06/fruits.png?itok=IRrBclNj"></Image>
-              <Image src="https://ciclovivo.com.br/wp-content/uploads/2012/12/iStock-612524020.jpg"></Image>
-              <Image src="https://www.dinheirorural.com.br/wp-content/uploads/sites/18/2020/11/31-418x235.jpg"></Image>
+              <Image src="https://2.bp.blogspot.com/-27m65p6ogck/T3Z0i0MP3WI/AAAAAAAAAmk/yzGONV5yeHE/s1600/hortifruti-01.jpg"></Image>
+              <Image src="https://institucional.hortifruti.com.br/wp-content/uploads/2014/05/campanha_holly_kiwi.jpg"></Image>
+              <Image src="https://institucional.hortifruti.com.br/wp-content/uploads/2014/05/campanha_holly_chuchu.jpg"></Image>
             </Carousel>
           </Adve>
           <ListBuy>
