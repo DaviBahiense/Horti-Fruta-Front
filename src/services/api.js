@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "https://horti-fruta.herokuapp.com/";
+export const BASE_URL = "https://horti-fruta.herokuapp.com";
 
 function createConfig(token) {
   return { headers: { Authorization: `Bearer ${token}` } };
