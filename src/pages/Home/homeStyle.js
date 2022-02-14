@@ -3,26 +3,10 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-`;
+  width:100%
+  height:100%
+  `;
 
-const CartContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-  height: 100%;
-  border: 2px solid #73d28f;
-  border-radius: 5px;
-  background-color: white;
-`;
-
-const ConfirmationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-width: 20%;
-  gap: 20px;
-`;
 const Top = styled.div`
   display: flex;
   justify-content: space-between;
@@ -42,6 +26,13 @@ const Top = styled.div`
     margin-right: 20px;
     color: #de4e4e;
   }
+  span {
+    font-size: 20px;
+    margin-right: 20px;
+    color: #de4e4e;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const Img = styled.img`
@@ -50,26 +41,36 @@ const Img = styled.img`
   margin-left: 5px;
 `;
 
+const List = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+`;
+
 const ListBuy = styled.div`
+  margin-top: 60px;
+  margin-bottom: 150px;
   width: 100%;
-  height: 100%;
   border-radius: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 const Product = styled.div`
-  width: 400px;
+  width: 200px;
   gap: 25px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   box-shadow: 0 0 0.7em gray;
   border-radius: 10px;
   margin-right: 45px;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
 `;
 
 const Description = styled.div`
@@ -79,24 +80,7 @@ const Description = styled.div`
   align-items: center;
   gap: 10px;
 `;
-const UserConfirmation = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #73d28f;
-  border-radius: 5px;
-`;
-const PaymentConfirmation = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #73d28f;
-  border-radius: 5px;
-`;
 
-const AddressConfirmation = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-`;
 const Footer = styled.footer`
   height: 100px;
   position: fixed;
@@ -140,6 +124,19 @@ const StyleLink = styled.div`
   }
 `;
 
+const Adve = styled.div`
+  margin-top: 100px;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 350px;
+  border-radius: 15px;
+`;
+
 const Icons = styled.div`
   display: flex;
   gap: 30px;
@@ -147,37 +144,62 @@ const Icons = styled.div`
 
 const ProductImg = styled.img`
   margin-top: 10px;
-  width: 70px;
-  height: 70px;
+  width: 150px;
+  height: 190px;
   border-radius: 10px;
 `;
-const Mid = styled.div`
+
+const Button = styled.div`
   display: flex;
+  flex-direction: row;
+  background-color: #de4e4e;
+  width: 80px;
+  height: 30px;
   justify-content: space-between;
-  margin-top: 100px;
-  width: 100%;
-  height: 70vh;
-  gap: 20px;
-  h1 {
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+  button {
+    border: none;
+    height: 30px;
+    width: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    text-decoration: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #de4e4e;
+  }
+
+  p {
+    width: 30px;
+    border-top: 1px solid #de4e4e;
+    border-bottom: 1px solid #de4e4e;
+    background-color: white;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
 export {
   Container,
   Top,
-  Footer,
-  StyleLink,
-  Saldo,
-  Icons,
   Img,
-  Mid,
+  Icons,
+  List,
+  Adve,
+  Image,
   ListBuy,
   Product,
   ProductImg,
   Description,
-  CartContainer,
-  ConfirmationContainer,
-  UserConfirmation,
-  PaymentConfirmation,
-  AddressConfirmation,
+  Button,
+  Footer,
+  StyleLink,
+  Saldo,
 };

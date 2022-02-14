@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000";
+export const BASE_URL = "http://localhost:5000";
 
 function createConfig(token) {
   return { headers: { Authorization: `Bearer ${token}` } };
@@ -37,15 +37,12 @@ function getCart(token) {
 }
 
 function sendOrder(orderItens, orderTotal, token) {
-  console.log("chegou pro envio");
   const config = createConfig(token);
   const promise = axios.post(
     `${BASE_URL}/order`,
     { orderItens: orderItens, orderTotal: orderTotal },
     config
   );
-
-  console.log(promise);
 
   return promise;
 }

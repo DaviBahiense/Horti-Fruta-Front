@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import api from "../../services/api";
 import Logo from "../../assets/Logo.png";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { ToastContainer, toast } from "react-toastify";
+
 import {
   Container,
   Top,
   Footer,
   StyleLink,
-  Saldo,
   Icons,
   Img,
   Mid,
@@ -27,9 +24,8 @@ import {
   UserConfirmation,
   AddressConfirmation,
   PaymentConfirmation,
-  StyleToast,
 } from "../../components/CartComponents";
-import { Bluetooth } from "react-ionicons";
+
 export default function Cart() {
   const navigate = useNavigate();
   const [body, setBody] = useState([]);
@@ -44,7 +40,6 @@ export default function Cart() {
 
   async function getCart() {
     try {
-      console.log("chamei o carrinho");
       const response = await api.getCart(auth.token);
 
       setBody(response.data.cart);
@@ -68,8 +63,6 @@ export default function Cart() {
   const arrCart = arr[0];
 
   async function confirmPurchase() {
-    console.log("Chegou na confirmação");
-
     if (body[0].length === 0) {
       return Swal.fire(
         "Seu Carrinho está Vazio!",
@@ -79,7 +72,7 @@ export default function Cart() {
     }
     try {
       const orderData = await api.sendOrder(body, total, auth.token);
-      console.log(orderData);
+
       Swal.fire({
         title: `Pedido enviado!`,
         text: `O número do seu pedido é:
@@ -154,7 +147,6 @@ export default function Cart() {
             <h1>Confirmar Compra</h1>
           </button>
         </StyleLink>
-        <ToastContainer />
       </Footer>
     </Container>
   );
