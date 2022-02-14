@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 import Header from "../Header";
 import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
-import { BASE_URL } from "../../services/api";
-import { Container } from "../Home/homeStyle";
-import { OrdersContainer } from "./Style";
+import {
+  OrdersContainer,
+  OrderNumber,
+  OrderDetails,
+  Order,
+  Title,
+} from "./Style";
 
 export default function UserPage() {
   const { auth } = useAuth();
@@ -18,15 +22,43 @@ export default function UserPage() {
   async function loadOrders() {
     try {
       const currentOrders = await api.getOrders(auth.token);
-      console.log(currentOrders);
+
+      setOrders(currentOrders.data.slice().reverse());
     } catch (error) {
       console.log(error);
     }
   }
+
+  console.log(orders);
   return (
-    <Container>
+    <>
       <Header />
-      <OrdersContainer></OrdersContainer>
-    </Container>
+      <OrdersContainer>
+        <Title>CONFIRA SEUS ÚLTIMOS PEDIDOS</Title>
+        {orders.map((order, i) => (
+          <>
+            <Order key={i}>
+              <OrderNumber>
+                <span>Código do Pedido:</span>
+                <span>{order.orderNumber}</span>
+              </OrderNumber>
+              <OrderDetails>
+                <span>
+                  Quantidade de Itens Pedidos:
+                  {order.orderItens[0].length}
+                </span>
+                <span>
+                  Preço final do pedido: R$
+                  {order.orderPrice.toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                  })}
+                </span>
+                <span>Status de Entrega: Em produção!</span>
+              </OrderDetails>
+            </Order>
+          </>
+        ))}
+      </OrdersContainer>
+    </>
   );
 }

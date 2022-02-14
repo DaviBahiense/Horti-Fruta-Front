@@ -68,8 +68,11 @@ export default function Home() {
   }
 
   function Remove(data, index) {
-    setTotal(total - data.price);
     const countersOut = counters;
+    if (countersOut[index].value === 0) {
+      return;
+    }
+    setTotal(total - data.price);
     countersOut[index].value--;
     setCounters(countersOut);
     for (let i = 0; i < cart.length; i++) {
