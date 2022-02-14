@@ -85,7 +85,7 @@ export default function Header() {
         <span>{welcomeMessage}</span>
         <ion-icon
           name="person-outline"
-          onClick={() => ({ auth } === null ? GoToLogin() : GoToUserPage())}
+          onClick={() => (auth === null ? GoToLogin() : GoToUserPage())}
         ></ion-icon>
         <ion-icon name="cart-outline" onClick={() => GoToCart()}></ion-icon>
       </Icons>
